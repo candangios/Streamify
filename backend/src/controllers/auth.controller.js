@@ -86,13 +86,22 @@ export async function logout(req, res) {
   res.clearCookie("token")
   res.status(200).json({ success: true, message: ' Logout successful' })
 }
+export async function me(req, res) {
+  try {
+    const user = req.user
+    res.status(200).json({ success: true, user: user })
+  } catch (error) {
+    console.log('Onboarding error:', error)
+    res.status(500).json({ message: 'Internal server error!' })
+  }
+}
 
 export async function onboard(req, res) {
   try {
     const { fullName, bio, nativeLanguage, learningLanguage, location } = req.body
     const userId = req.user.id
     if (!fullName, !bio, !nativeLanguage, !learningLanguage, !location) {
-      res.status(400).json({
+      return res.status(400).json({
         message: 'All fields is required',
         missingFields: [
           !fullName && 'fullName',
@@ -106,15 +115,18 @@ export async function onboard(req, res) {
       ...req.body,
       isOnboarded: true
     }, { new: true })
+
     await upsertStreamUser({
       id: updateUser._id.toString(),
       name: updateUser.fullName,
       image: updateUser.profilePic || ''
     })
 
+
+
     if (!updateUser) { return res.status(404).json({ message: 'User not found!' }) }
 
-    // todo update user on stream
+
     res.status(200).json({ success: true, user: updateUser })
   } catch (error) {
     console.log('Onboarding error:', error)
