@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
   res.send('helloword')
 })
 app.use('/api/auth', authRoutes)
-app.use('/api/user', userRoutes)
+app.use('/api/users', userRoutes)
 app.use('/api/chat', chatRoutes)
 
 app.listen(PORT, () => {

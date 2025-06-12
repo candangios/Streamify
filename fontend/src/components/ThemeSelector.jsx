@@ -17,7 +17,7 @@ function ThemeSelector() {
       >
         <div className='space-y-1'>
           {THEMES.map((themeOption) => (
-            <buton
+            <button
               key={themeOption.name}
               className={`w-full px-4 py-3 rounded-xl flex items-center gap-3 transition-colors
               ${theme === themeOption.name
@@ -44,7 +44,7 @@ function ThemeSelector() {
               </div>
 
 
-            </buton>
+            </button>
           ))}
         </div>
 
