@@ -5,19 +5,18 @@ import { BellIcon, ClockIcon, MessageSquareIcon, UserCheckIcon } from 'lucide-re
 
 function NotificationPage() {
   const queryClient = useQueryClient()
+
   const { data: friendRequests, isLoading } = useQuery({
-    queryKey: ["friendRequests"],
+    queryKey: ['friendRequests'],
     queryFn: getFriendRequests,
-  })
+  });
   const { mutate: acceptRequestMutation, isPending } = useMutation({
     mutationFn: acceptFriendRequest,
     onSuccess: () => {
-      queryClient.invalidateQueries[{ queryKey: ['friendRequests'] }]
-      queryClient.invalidateQueries[{ queryKey: ['friends'] }]
-
-    }
-  })
-
+      queryClient.invalidateQueries({ queryKey: ["friendRequests"] });
+      queryClient.invalidateQueries({ queryKey: ["friends"] });
+    },
+  });
 
   const incomingRequests = friendRequests?.incomingReqs || []
   const acceptedRequests = friendRequests?.acceptedReqs || []

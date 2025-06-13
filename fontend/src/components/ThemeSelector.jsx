@@ -6,7 +6,7 @@ import { THEMES } from '../constants'
 function ThemeSelector() {
   const { theme, setTheme } = useThemeStore()
   return (
-    <div className='dropdown -dropdown-end'>
+    <div className='dropdown dropdown-end'>
       {/* Dropdown trigger */}
       <button className='btn btn-ghost btn-circle' tabIndex={0}>
         <PaletteIcon className='size-5' />

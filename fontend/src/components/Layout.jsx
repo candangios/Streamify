@@ -9,7 +9,7 @@ function Layout({ children, showSidebar = false }) {
         {showSidebar && (<Sidebar />)}
         <div className='flex-1 flex flex-col'>
           <Navbar />
-          <main className='flex-1 overflow-y-auto'>
+          <main className='bg-base-100 flex-1 overflow-y-auto'>
             {children}
           </main>
 
